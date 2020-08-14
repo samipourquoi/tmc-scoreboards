@@ -17,11 +17,9 @@ scoreboardSearch.onchange = () => {
 	let variableName = currentServer.innerHTML.trim().toLowerCase()
 	scoreboardSearch.blur()
 
-	// if (serverNames.includes(currentServer.innerHTML.trim()) || variableName === "global") {
-		console.log(variableName)
-		let stats = variableToStats[variableName] === undefined ? {} : variableToStats[variableName]
-		update(sort( stats[scoreboardSearch.value]))
-	// }
+	scoreboardSearch.value = scoreboardSearch.value.trim()
+	let stats = variableToStats[variableName] === undefined ? {} : variableToStats[variableName]
+	update(sort(stats[scoreboardSearch.value]))
 }
 
 function setup() {
