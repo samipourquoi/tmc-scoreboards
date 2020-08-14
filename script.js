@@ -1,18 +1,26 @@
+// oopsi spaghetti code
+
 let scoreboardCard = document.getElementById("scoreboard")
 let scoreboardSearch = document.getElementById("scoreboard_search")
 let arrow = document.getElementById("arrow_hitbox")
 let serverList = document.getElementById("server_list")
 let currentServer = document.getElementById("current_server")
+const variableToStats = {
+	"endtech": endtech,
+	"global": global
+}
 
 setup()
 
-scoreboardSearch.oninput = () => {
+scoreboardSearch.onchange = () => {
 	let variableName = currentServer.innerHTML.trim().toLowerCase()
-	console.log(variableName)
+	scoreboardSearch.blur()
 
-	if (serverNames.includes(currentServer.innerHTML.trim()) || variableName == "global") {
-		eval("update(sort(" + variableName + "[scoreboardSearch.value]))")
-	}
+	// if (serverNames.includes(currentServer.innerHTML.trim()) || variableName === "global") {
+		console.log(variableName)
+		let stats = variableToStats[variableName] === undefined ? {} : variableToStats[variableName]
+		update(sort( stats[scoreboardSearch.value]))
+	// }
 }
 
 function setup() {
@@ -44,9 +52,13 @@ function update(objective) {
 
 /** Sorts an object of scores to a 2D array of [name, score] */
 function sort(objective) {
-	let unsorted = Object.entries(objective)
-	let sorted = unsorted.sort((a, b) => b[1] - a[1])
-	return sorted;
+	try {
+		let unsorted = Object.entries(objective)
+		let sorted = unsorted.sort((a, b) => b[1] - a[1])
+		return sorted;
+	} catch (e) {
+		return [[]];
+	}
 }
 
 /** Converts objective name to its display name. e.g. u-stone -> Used Stone */
@@ -128,10 +140,8 @@ function setupListeners(li) {
 	})
 
 	li.addEventListener("click", () => {
-		console.log(hoveredServer)
-
 		serverList.onmouseleave()
 		currentServer.innerHTML = hoveredServer
-		scoreboardSearch.oninput()
+		scoreboardSearch.onchange()
 	})
 }
