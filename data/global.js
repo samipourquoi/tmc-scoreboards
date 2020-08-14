@@ -1,7 +1,7 @@
 // Merges every player from all servers
-let serverNames = ["EndTech", "Ingenium"]
+let serverNames = ["EndTech", "Ingenium", "MelonTech"]
 
-let servers = [endtech, ingenium]
+let servers = [endtech, ingenium, melontech]
 let global = {}
 for (let i = 0; i < servers.length; i++) {
 	let server = servers[i]

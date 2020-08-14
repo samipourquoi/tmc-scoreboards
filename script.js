@@ -8,6 +8,7 @@ let currentServer = document.getElementById("current_server")
 const variableToStats = {
 	"ingenium": ingenium,
 	"endtech": endtech,
+	"melontech": melontech,
 	"global": global
 }
 
