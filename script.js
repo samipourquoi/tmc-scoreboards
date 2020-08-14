@@ -6,6 +6,7 @@ let arrow = document.getElementById("arrow_hitbox")
 let serverList = document.getElementById("server_list")
 let currentServer = document.getElementById("current_server")
 const variableToStats = {
+	"ingenium": ingenium,
 	"endtech": endtech,
 	"global": global
 }
