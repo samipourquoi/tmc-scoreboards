@@ -9,6 +9,7 @@ const variableToStats = {
 	"ingenium": ingenium,
 	"endtech": endtech,
 	"melontech": melontech,
+	"hypnos": hypnos,
 	"global": global
 }
 
