@@ -11,7 +11,8 @@ const variableToStats = {
 	"melontech": melontech,
 	"hypnos": hypnos,
 	"global": global,
-	"hekate": hekate
+	"hekate": hekate,
+	"wavetech": wavetech
 }
 
 setup()
