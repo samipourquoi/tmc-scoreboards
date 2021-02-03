@@ -1,8 +1,10 @@
 # build
+# - client
 dist
-dist-newstyle
 .cache
 node_modules
+# - server
+*.stack-work*
 
 # macos
 *.DS_Store
