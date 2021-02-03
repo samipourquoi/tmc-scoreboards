@@ -1,6 +1,8 @@
 # build
 dist
 dist-newstyle
+.cache
+node_modules
 
 # macos
 *.DS_Store
