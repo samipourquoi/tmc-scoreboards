@@ -1,5 +1,5 @@
 cabal-version:  >= 1.2
-name:           server
+name:           scoreboards
 version:        0.1.0.0
 homepage:       https://github.com/samipourquoi/tmc-scoreboards#readme
 bug-reports:    https://github.com/samipourquoi/tmc-scoreboards/issues
@@ -12,12 +12,10 @@ source-repository head
   type: git
   location: https://github.com/samipourquoi/tmc-scoreboards
 
-executable server
-  main-is:          Main.hs
-  build-depends:
+library
+  exposed-modules:  Data.Scoreboards
+  -- hs-source-dirs:   Data
+  build-depends:    
     base,
-    scotty >= 0.12,
-    wai-middleware-static,
-    text,
-    scoreboards
+    csv
   default-language: Haskell2010
