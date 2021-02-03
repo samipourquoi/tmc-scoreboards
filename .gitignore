@@ -1,7 +1,6 @@
-# macOS
+# build
+dist
+dist-newstyle
 
-.DS_Store
-
-# vscode
-
-.vscode
+# macos
+*.DS_Store
