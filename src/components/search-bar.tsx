@@ -5,7 +5,7 @@ export function SearchBar() {
 	return (
 		<>
 			<label htmlFor="search-bar"/>
-			<input id="search-bar" type="text" placeholder="Search..."/>
+			<input id="search-bar" type="text" placeholder="Search…"/>
 		</>
 	)
 }

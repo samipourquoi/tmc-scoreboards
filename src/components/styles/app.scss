@@ -17,11 +17,32 @@
   background-color: $dark-gray;
   width: 100vw;
   height: 100vh;
+  padding: 30px;
+}
+
+header {
+  color: $white;
+
+  text-align: center;
+
+  h1 {
+    @include minecraft;
+    font-size: 50px;
+  }
+
+  .explanation {
+    font-family: monospace;
+    margin: 30px;
+
+    p {
+      margin: 20px;
+    }
+  }
 }
 
 main {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
 }
