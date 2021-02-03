@@ -1,0 +1,33 @@
+@import "colors";
+
+#scoreboard {
+  padding: 20px;
+
+  width: 500px;
+  max-width: 80%;
+  height: 50vh;
+
+  background-color: $gray;
+
+  font-family: "Minecraft", Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: xx-large;
+  -webkit-font-smoothing: none;
+
+  .scores {
+    list-style: none;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+
+      .key {
+        color: $light-gray;
+      }
+
+      .value {
+        color: $red;
+      }
+    }
+  }
+}

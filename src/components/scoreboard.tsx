@@ -1,5 +1,7 @@
 import React from "react";
 import { ScoreboardEntry } from "../typings/api";
+import { SearchBar } from "./search-bar";
+import "./styles/scoreboard.scss";
 
 export function Scoreboard() {
 	const server = "EndTech"
@@ -10,6 +12,8 @@ export function Scoreboard() {
 
 	return (
 		<div id="scoreboard">
+			<SearchBar/>
+
 			<ul className="scores">
 				{ entries.map(entry => (<li>
 					<div className="key">{ entry.key }</div>

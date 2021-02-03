@@ -1,0 +1,27 @@
+@import "colors";
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("../../minecraft.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  background-color: $dark-gray;
+  width: 100vw;
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
