@@ -1,6 +1,0 @@
-cradle:
-  multi:
-    - path: "./client"
-      config:
-        cradle:
-          cabal:

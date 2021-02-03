@@ -4,3 +4,6 @@ dist-newstyle
 
 # macos
 *.DS_Store
+
+# editors
+.idea
