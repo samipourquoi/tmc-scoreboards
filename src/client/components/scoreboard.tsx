@@ -11,7 +11,6 @@ export function Scoreboard() {
 		{ user: "ilmango", score: 1010 }
 	] as GET.ScoreboardEntry[]);
 
-
 	return (
 		<div id="scoreboard">
 			<SearchBar
