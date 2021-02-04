@@ -16,6 +16,6 @@ main = do
 
         -- api
         get "/api/:server/:objective" $ do
-        server <- param "server"
-        objective <- param "objective"
-        text $ server <> " " <> objective
+            server <- param "server"
+            objective <- param "objective"
+            text $ server <> " " <> objective
