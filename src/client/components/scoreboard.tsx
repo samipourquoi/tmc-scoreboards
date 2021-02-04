@@ -15,10 +15,12 @@ export function Scoreboard() {
 			<SearchBar/>
 
 			<ul className="scores">
-				{ entries.map(entry => (<li>
-					<div className="key">{ entry.user }</div>
-					<div className="value">{ entry.score }</div>
-				</li>)) }
+				{ entries.map(({ user, score }) => (
+					<li key={ user }>
+						<div className="key">{ user }</div>
+						<div className="value">{ score }</div>
+					</li>
+				)) }
 			</ul>
 		</div>
 	)
