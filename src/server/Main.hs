@@ -1,13 +1,22 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 import Web.Scotty
-import Network.Wai.Middleware.Static
-import Data.Scoreboards (generateDatabase)
+import Network.Wai.Middleware.Static ( addBase, staticPolicy )
+import Data.Scoreboards
 import Control.Monad
+import Data.Aeson.Types
+
+instance ToJSON Entry where
+    toJSON (Entry _ user score _) = 
+        object [
+            "user" .= user,
+            "score" .= score
+        ]
 
 main :: IO ()
 main = do
     db <- generateDatabase ["endtech"]
+    let onObjectiveRequest = databaseLookup db
 
     scotty 3000 $ do
         -- static content
@@ -15,7 +24,13 @@ main = do
         middleware $ staticPolicy $ addBase "dist"
 
         -- api
-        get "/api/:server/:objective" $ do
-            server <- param "server"
+        get "/api/:objective" $ do
             objective <- param "objective"
-            text $ server <> " " <> objective
+            let entries = onObjectiveRequest objective Nothing
+            json entries
+
+        get "/api/:objective/:server" $ do
+            objective <- param "objective"
+            server <- param "server"
+            let entries = onObjectiveRequest objective (Just server)
+            json entries

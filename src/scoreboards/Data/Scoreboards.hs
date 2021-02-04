@@ -1,12 +1,12 @@
 module Data.Scoreboards
-(   Entry,
+(   Entry (Entry),
     Database,
     readFromCSV,
     generateDatabase,
-    getObjective ) where
+    databaseLookup ) where
 
 import qualified Data.Map as Map
-import           Text.CSV (parseCSVFromFile)
+import Text.CSV (parseCSVFromFile)
 import System.FilePath.Posix (takeBaseName)
 
 data Entry = Entry { serverEntry    :: String,
@@ -40,8 +40,8 @@ generateDatabase s = do
     where
         toFileName s = "data/" ++ s ++ ".csv"
 
-getObjective :: Database -> String -> Maybe String -> [Entry]
-getObjective db objectiveLookup maybeServerLookup =
+databaseLookup :: Database -> String -> Maybe String -> [Entry]
+databaseLookup db objectiveLookup maybeServerLookup =
     filter filterObjective . filter filterServer $ db
 
     where 

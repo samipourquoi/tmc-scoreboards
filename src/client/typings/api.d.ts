@@ -1,4 +1,4 @@
 export interface ScoreboardEntry {
-	key: string,
-	value: number
+	user: string,
+	score: number
 }
