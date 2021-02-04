@@ -6,10 +6,14 @@ export const entityPrefixes = ["k", "kb"];
 export const statPrefixes = ["z"];
 export const prefixes = [...itemPrefixes, ...blockPrefixes, ...entityPrefixes, ...statPrefixes];
 
+export const custom = ["dig", "picks", "shovels", "axes"];
+
 export type Prefix = "m" | "u" | "d" | "p" | "b" | "k" | "kb" | "z" | "c";
-export type ObjectiveType = `${Prefix}-${string}`;
+export type ObjectiveType = `${Prefix}-${string}` | "dig" | "picks" | "shovels" | "axes";
 
 export function isValidObjective(objective: string): objective is ObjectiveType {
+	if (custom.includes(objective)) return true;
+
 	const [,prefix, item] = objective.match(/([mudpbkzc]|kb)-(\w+)/) ?? [];
 	if (prefix && item) {
 	 	return (blockPrefixes.includes(prefix)  ? scoreboards.blocks  .includes(item) : false) ||
