@@ -8,6 +8,7 @@ module Data.Scoreboards
 import qualified Data.Map as Map
 import Text.CSV (parseCSVFromFile)
 import System.FilePath.Posix (takeBaseName)
+import Data.Sort (sortBy)
 
 data Entry = Entry { serverEntry    :: String,
                      userEntry      :: String,
@@ -42,7 +43,7 @@ generateDatabase s = do
 
 databaseLookup :: Database -> String -> Maybe String -> [Entry]
 databaseLookup db objectiveLookup maybeServerLookup =
-    filter filterObjective . filter filterServer $ db
+    sortBy sortEntries . filter filterObjective . filter filterServer $ db
 
     where 
         filterServer :: Entry -> Bool
@@ -53,3 +54,6 @@ databaseLookup db objectiveLookup maybeServerLookup =
 
         filterObjective :: Entry -> Bool
         filterObjective entry = objectiveEntry entry == objectiveLookup
+
+        sortEntries :: Entry -> Entry -> Ordering
+        sortEntries e1 e2 = compare (valueEntry e2) (valueEntry e1)
