@@ -33,7 +33,9 @@ header {
 
   .explanation {
     font-family: monospace;
-    margin: 30px;
+    width: 575px;
+    max-width: 100%;
+    margin: auto;
 
     p {
       margin: 20px;
