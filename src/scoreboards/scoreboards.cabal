@@ -17,5 +17,6 @@ library
   -- hs-source-dirs:   Data
   build-depends:    
     base,
-    csv
+    csv,
+    containers
   default-language: Haskell2010
