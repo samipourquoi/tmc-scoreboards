@@ -1,6 +1,8 @@
 import React from "react";
 import "./styles/search-bar.scss";
 
+import scoreboards from "../../../data/scoreboards.json";
+
 export function SearchBar() {
 	return (
 		<>

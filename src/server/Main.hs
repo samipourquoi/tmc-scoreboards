@@ -19,10 +19,6 @@ main = do
     let onObjectiveRequest = databaseLookup db
 
     scotty 3000 $ do
-        -- static content
-        get "/" $ file "dist/index.html"
-        middleware $ staticPolicy $ addBase "dist"
-
         -- api
         get "/api/:objective" $ do
             objective <- param "objective"
@@ -34,3 +30,7 @@ main = do
             server <- param "server"
             let entries = onObjectiveRequest objective (Just server)
             json entries
+
+        -- static content
+        get "/" $ file "dist/index.html"
+        middleware $ staticPolicy $ addBase "dist"
