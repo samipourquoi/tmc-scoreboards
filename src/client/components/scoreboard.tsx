@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { GET } from "../typings/api";
 import { SearchBar } from "./search-bar";
 import "./styles/scoreboard.scss";
 
 export function Scoreboard() {
-	const server = "EndTech"
-	const entries: GET.ScoreboardEntry[] = [
+	const [ server, setServer ] = useState("");
+
+	const [ entries, setEntries ] = useState([
 		{ user: "samipourquoi", score: 1 },
 		{ user: "ilmango", score: 1010 }
-	]
+	] as GET.ScoreboardEntry[]);
+
+	const fetchObjective = async (objective: string) => {
+	}
 
 	return (
 		<div id="scoreboard">
-			<SearchBar/>
+			<SearchBar fetchObjective={ fetchObjective } />
 
 			<ul className="scores">
 				{ entries.map(({ user, score }) => (

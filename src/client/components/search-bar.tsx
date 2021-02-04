@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/search-bar.scss";
-import { isValidObjective } from "../typings/objectives";
+import { isValidObjective, ObjectiveType } from "../typings/objectives";
 
-export function SearchBar() {
-	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value;
-		if (isValidObjective(value)) {
-			console.log(value);
-		}
-	};
+export function SearchBar(
+	{ fetchObjective }:
+	{ fetchObjective: (name: string) => void }
+) {
+	const [ objective, setObjective ] = useState("");
 
 	return (
 		<>
 			<label htmlFor="search-bar"/>
-			<input onChange={ onChange } id="search-bar" type="text" placeholder="Search…"/>
+			<input onChange={ event => {
+				setObjective(event.target.value);
+
+				if (isValidObjective(objective))
+					fetchObjective(objective);
+			}} id="search-bar" type="text" placeholder="Search…"/>
 		</>
 	)
 }
