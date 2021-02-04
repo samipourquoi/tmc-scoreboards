@@ -12,15 +12,15 @@
     "typescript": "^4.1.3"
   },
   "scripts": {
-    "dev": "npx parcel src/client/index.html"
+    "dev": "node src/setup.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/samipourquoi/tmc-scoreboards.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "samipourquoi",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/samipourquoi/tmc-scoreboards/issues"
   },

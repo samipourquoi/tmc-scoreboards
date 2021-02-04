@@ -11,12 +11,13 @@ export function Scoreboard() {
 		{ user: "ilmango", score: 1010 }
 	] as GET.ScoreboardEntry[]);
 
-	const fetchObjective = async (objective: string) => {
-	}
 
 	return (
 		<div id="scoreboard">
-			<SearchBar fetchObjective={ fetchObjective } />
+			<SearchBar
+				server={ server }
+				onObjectiveChange={ setEntries }
+			/>
 
 			<ul className="scores">
 				{ entries.map(({ user, score }) => (

@@ -12,8 +12,8 @@ export type ObjectiveType = `${Prefix}-${string}`;
 export function isValidObjective(objective: string): objective is ObjectiveType {
 	const [,prefix, item] = objective.match(/([mudpbkz]|kb)-(\w+)/) ?? [];
 	if (prefix && item) {
-	 	return (itemPrefixes.includes(prefix)   ? scoreboards.items   .includes(item) : false) ||
-			   (blockPrefixes.includes(prefix)  ? scoreboards.blocks  .includes(item) : false) ||
+	 	return (blockPrefixes.includes(prefix)  ? scoreboards.blocks  .includes(item) : false) ||
+			   (itemPrefixes.includes(prefix)   ? scoreboards.items   .includes(item) : false) ||
 			   (entityPrefixes.includes(prefix) ? scoreboards.entities.includes(item) : false) ||
 			   (statPrefixes.includes(prefix)   ? scoreboards.stats	  .includes(item) : false);
 	} else {
