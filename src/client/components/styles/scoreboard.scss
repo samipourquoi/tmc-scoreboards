@@ -1,9 +1,9 @@
 @import "colors";
 
 #scoreboard {
+  box-sizing: border-box;
   padding: 20px;
 
-  width: 500px;
   max-width: 80%;
 
   background-color: $gray;
@@ -24,6 +24,7 @@
 
       .value {
         color: $red;
+        margin-left: 10px;
       }
     }
   }
