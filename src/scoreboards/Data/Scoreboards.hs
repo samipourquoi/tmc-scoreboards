@@ -9,12 +9,13 @@ import qualified Data.Map as Map
 import Text.CSV (parseCSVFromFile)
 import System.FilePath.Posix (takeBaseName)
 import Data.Sort (sortBy)
+import Data.List
 
 data Entry = Entry { serverEntry    :: String,
                      userEntry      :: String,
                      valueEntry     :: Integer,
                      objectiveEntry :: String }
-    deriving (Show)
+    deriving (Show, Eq)
 
 type Database = [Entry]
 
@@ -43,9 +44,11 @@ generateDatabase s = do
 
 databaseLookup :: Database -> String -> Maybe String -> [Entry]
 databaseLookup db objectiveLookup maybeServerLookup =
-    sortBy sortEntries . filter filterObjective . filter filterServer $ db
+    sortBy sortEntries . mergeEntries . filterEntries $ db
+    where
+        filterEntries :: Database -> [Entry]
+        filterEntries = filter filterObjective . filter filterServer
 
-    where 
         filterServer :: Entry -> Bool
         filterServer entry = 
             case maybeServerLookup of
@@ -54,6 +57,22 @@ databaseLookup db objectiveLookup maybeServerLookup =
 
         filterObjective :: Entry -> Bool
         filterObjective entry = objectiveEntry entry == objectiveLookup
+
+        mergeEntries :: [Entry] -> [Entry]
+        mergeEntries = addScores . groupByUser
+            where
+                groupByUser :: [Entry] -> [[Entry]]
+                groupByUser [] = []
+                groupByUser list = nub [
+                  filter (\entry -> userEntry entry == userEntry x) list
+                  | x <- list ]
+
+                addScores :: [[Entry]] -> [Entry]
+                addScores [] = []
+                addScores list = [
+                  Entry server user scoreSum objective
+                  | x@((Entry server user _ objective) : _) <- list,
+                  let scoreSum = foldl (\a e -> valueEntry e + a) 0 x ]
 
         sortEntries :: Entry -> Entry -> Ordering
         sortEntries e1 e2 = compare (valueEntry e2) (valueEntry e1)
