@@ -20,7 +20,7 @@ export function SearchBar(props: {
 		if (cache[objective] && cache[objective][props.server]) {
 			props.onObjectiveChange(cache[objective][props.server]);
 		} else {
-			const response = await fetch(`/api/${ objective }/${ props.server }`);
+			const response = await fetch(`/api/${ objective }/${ props.server.toLowerCase() }`);
 			try {
 				const json = await response.json();
 				cache[objective] = {
@@ -37,14 +37,20 @@ export function SearchBar(props: {
 		}
 	}
 
+	const updateObjective = (objective: string) => {
+		if (isValidObjective(objective)) {
+			fetchObjective(objective);
+		}
+	}
+
+	// @ts-ignore
+	updateObjective(document.getElementById("search-bar")?.value || "");
+
 	return (
 		<>
 			<label htmlFor="search-bar"/>
-			<input onChange={ event => {
-				if (isValidObjective(event.target.value)) {
-					fetchObjective(event.target.value);
-				}
-			}} id="search-bar" type="text" placeholder="Search…"/>
+			<input onChange={ event => updateObjective(event.target.value)}
+				   id="search-bar" type="text" placeholder="Search…"/>
 		</>
 	)
 }

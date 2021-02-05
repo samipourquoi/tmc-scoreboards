@@ -15,21 +15,22 @@ instance ToJSON Entry where
 
 main :: IO ()
 main = do
-    db <- generateDatabase ["endtech"]
+    db <- generateDatabase ["endtech","litetech"]
     let onObjectiveRequest = databaseLookup db
 
     scotty 3000 $ do
         -- api
         get "/api/:objective" $ do
             objective <- param "objective"
-            let entries = onObjectiveRequest objective Nothing
-            json entries
+            json $ onObjectiveRequest objective Nothing
 
         get "/api/:objective/:server" $ do
             objective <- param "objective"
             server <- param "server"
-            let entries = onObjectiveRequest objective (Just server)
-            json entries
+            json $ onObjectiveRequest objective (
+                if server == "global"
+                    then Nothing
+                    else Just server)
 
         -- static content
         get "/" $ file "dist/index.html"

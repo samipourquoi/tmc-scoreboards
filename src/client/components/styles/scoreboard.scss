@@ -1,31 +1,32 @@
 @import "colors";
 
 #scoreboard {
-  box-sizing: border-box;
-  padding: 20px;
-
+  @include minecraft;
   max-width: 80%;
 
-  background-color: $gray;
+  .card {
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: $gray;
 
-  @include minecraft;
-  font-size: xx-large;
+    .scores {
+      list-style: none;
 
-  .scores {
-    list-style: none;
+      li {
+        display: flex;
+        justify-content: space-between;
 
-    li {
-      display: flex;
-      justify-content: space-between;
+        .key {
+          color: $light-gray;
+        }
 
-      .key {
-        color: $light-gray;
-      }
-
-      .value {
-        color: $red;
-        margin-left: 10px;
+        .value {
+          color: $red;
+          margin-left: 10px;
+        }
       }
     }
   }
+
+  font-size: xx-large;
 }

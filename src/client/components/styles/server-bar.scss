@@ -1,0 +1,50 @@
+@import "colors";
+
+.server-bar-container {
+  color: $white;
+  text-align: center;
+  margin: 25px 0;
+  cursor: pointer;
+
+  $border-width: 4px;
+  @mixin box {
+    padding: 10px;
+    border: $border-width $white solid;
+  }
+
+  .server-bar {
+    @include box;
+    background: $black;
+    vertical-align: middle;
+    display: flex;
+
+    .square-thingy {
+      position: absolute;
+      margin-left: 5px;
+    }
+
+    .server-name {
+      width: 100%;
+    }
+  }
+
+  .dropdown {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      @include box;
+
+      margin-top: -($border-width);
+      background-color: #262626;
+      color: $light-gray;
+
+      transition: .4s ease-out;
+      &:hover {
+        background-color: $black;
+        color: $white;
+      }
+    }
+  }
+}
