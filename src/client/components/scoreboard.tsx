@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GET } from "../typings/api";
-import { SearchBar } from "./search-bar";
+import { ObjectiveBar } from "./objective-bar";
 import "./styles/scoreboard.scss";
 import { ServerBar } from "./server-bar";
 
@@ -14,7 +14,7 @@ export function Scoreboard() {
 			<ServerBar serverState={[server, setServer]}/>
 
 			<div className="card">
-				<SearchBar
+				<ObjectiveBar
 					server={ server }
 					onObjectiveChange={ setEntries }
 				/>

@@ -18,7 +18,7 @@ main = do
     db <- generateDatabase ["endtech","litetech"]
     let onObjectiveRequest = databaseLookup db
 
-    scotty 3000 $ do
+    scotty 80 $ do
         -- api
         get "/api/:objective" $ do
             objective <- param "objective"

@@ -1,0 +1,4 @@
+.idea
+.cache
+*.stack-work*
+node_modules

@@ -9,7 +9,7 @@ type Cache = {
 	}
 }
 
-export function SearchBar(props: {
+export function ObjectiveBar(props: {
 	server: string,
 	onObjectiveChange:
 		(entries: GET.ScoreboardEntry[]) => void
