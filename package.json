@@ -12,7 +12,8 @@
     "typescript": "^4.1.3"
   },
   "scripts": {
-    "dev": "node src/setup.js"
+    "dev": "node src/setup.js",
+    "build": "npx parcel build src/client/index.html"
   },
   "repository": {
     "type": "git",

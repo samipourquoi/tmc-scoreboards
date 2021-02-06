@@ -1,3 +1,6 @@
+error:
+	@echo "Please use one the following targets: all, client, server, docker, clean"
+
 all: client server
 
 docker: client
