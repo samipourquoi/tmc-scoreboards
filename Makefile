@@ -8,10 +8,11 @@ dist: node_modules
 	rm -rf dist
 	npx parcel build src/client/index.html
 
+# because of https://github.com/mfine/heroku-buildpack-stack
+install: server
 server:
-	stack build --fast
+	stack build --fast --copy-bins
 
-install: node_modules
 node_modules:
 	npm ci
 
