@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/search-bar.scss";
 import { isValidObjective, ObjectiveType } from "../typings/objectives";
 import { GET } from "../typings/api";
@@ -15,17 +15,18 @@ export function ObjectiveBar(props: {
 		(entries: GET.ScoreboardEntry[]) => void
 }) {
 	const [ cache, setCache ] = useState({} as Cache);
+	const [ tempSearch, setTempSearch ] = useState("");
 
-	const fetchObjective = async (objective: string) => {
-		if (cache[objective] && cache[objective][props.server]) {
-			props.onObjectiveChange(cache[objective][props.server]);
+	const fetchObjective = async () => {
+		if (cache[tempSearch] && cache[tempSearch][props.server]) {
+			props.onObjectiveChange(cache[tempSearch][props.server]);
 		} else {
-			const response = await fetch(`/api/${ objective }/${ props.server.toLowerCase() }`);
+			const response = await fetch(`/api/${ tempSearch }/${ props.server.toLowerCase() }`);
 			try {
 				const json = await response.json();
-				cache[objective] = {
+				cache[tempSearch] = {
 					[props.server]: json,
-					...cache[objective] || []
+					...cache[tempSearch] || []
 				};
 
 				// i don't know if this is really necessary
@@ -37,19 +38,26 @@ export function ObjectiveBar(props: {
 		}
 	}
 
-	const updateObjective = (objective: string) => {
-		if (isValidObjective(objective)) {
-			fetchObjective(objective);
-		}
-	}
+	useEffect(() => {
+		if (isValidObjective(tempSearch))
+			fetchObjective();
+	});
 
-	// @ts-ignore
-	updateObjective(document.getElementById("search-bar")?.value || "");
+	useEffect(() => {
+		(async () => {
+			const response = await fetch("/api/random");
+			const { random } = await response.json() as GET.RandomObjective;
+			console.log(random);
+			(document.getElementById("search-bar") as HTMLInputElement).value = random;
+			setTempSearch(random);
+			fetchObjective();
+		})();
+	}, []);
 
 	return (
 		<>
 			<label htmlFor="search-bar"/>
-			<input onChange={ event => updateObjective(event.target.value)}
+			<input onChange={ event => setTempSearch(event.target.value.trim())}
 				   id="search-bar" type="text" placeholder="Search…"/>
 		</>
 	)

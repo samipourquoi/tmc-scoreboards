@@ -3,4 +3,8 @@ export module GET {
 		user: string,
 		score: number
 	}
+
+	export interface RandomObjective {
+		random: string
+	}
 }

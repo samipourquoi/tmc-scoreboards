@@ -3,12 +3,14 @@ module Data.Scoreboards
     Database,
     readFromCSV,
     generateDatabase,
-    databaseLookup ) where
+    databaseLookup,
+    randomObjective ) where
 
 import Text.CSV (parseCSVFromFile)
 import System.FilePath.Posix (takeBaseName)
 import Data.List
 import Data.Aeson.Types
+import Data.Time.Clock.POSIX (getPOSIXTime)
 
 data Entry = Entry { serverEntry    :: String,
                      userEntry      :: String,
@@ -41,6 +43,19 @@ generateDatabase s = do
     return $ concat nestedScoreboards
     where
         toFileName f = "data/" ++ f ++ ".csv"
+
+randomObjective :: Database -> IO String
+randomObjective [] = return []
+randomObjective db = do
+  index <- randomIndex
+  return $ objectiveList !! index
+  where
+    objectiveList :: [String]
+    objectiveList = map objectiveEntry $ db
+
+    randomIndex :: IO Int
+    randomIndex = ((\i -> i `mod` length objectiveList) . round) <$> getPOSIXTime
+
 
 databaseLookup :: Database -> String -> Maybe String -> [Entry]
 databaseLookup db objectiveLookup maybeServerLookup =

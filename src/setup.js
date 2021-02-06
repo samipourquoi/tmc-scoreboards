@@ -6,7 +6,7 @@ const Bundler = require("parcel-bundler");
 const backEnd = {
 	protocol: "http",
 	host: "localhost",
-	port: 3000
+	port: 80
 };
 
 const parcelEnd = {

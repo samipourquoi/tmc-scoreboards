@@ -4,7 +4,9 @@ export const itemPrefixes = ["u", "d", "p", "b", "c"];
 export const blockPrefixes = ["m", ...itemPrefixes];
 export const entityPrefixes = ["k", "kb"];
 export const statPrefixes = ["z"];
-export const prefixes = [...itemPrefixes, ...blockPrefixes, ...entityPrefixes, ...statPrefixes];
+export const prefixes = Array.from(
+	new Set([...itemPrefixes, ...blockPrefixes, ...entityPrefixes, ...statPrefixes])
+);
 
 export const custom = ["dig", "picks", "shovels", "axes"];
 
