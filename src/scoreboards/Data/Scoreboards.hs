@@ -5,11 +5,10 @@ module Data.Scoreboards
     generateDatabase,
     databaseLookup ) where
 
-import qualified Data.Map as Map
 import Text.CSV (parseCSVFromFile)
 import System.FilePath.Posix (takeBaseName)
-import Data.Sort (sortBy)
 import Data.List
+import Data.Aeson.Types
 
 data Entry = Entry { serverEntry    :: String,
                      userEntry      :: String,
@@ -21,9 +20,9 @@ type Database = [Entry]
 
 readFromCSV :: FilePath -> IO Database
 readFromCSV path = do
-    content <- parseCSVFromFile path
-    return $ case content of
-        Left err -> []
+    csvFile <- parseCSVFromFile path
+    return $ case csvFile of
+        Left        _ -> []
         Right content -> map readRow content
     where
         readRow :: [String] -> Entry
@@ -34,13 +33,14 @@ readFromCSV path = do
                 valueEntry=read value,
                 objectiveEntry=objective
             }
+        readRow _ = Entry "unknown" "unknown" 0 "m-air"
 
 generateDatabase :: [String] -> IO Database
 generateDatabase s = do
     nestedScoreboards <- mapM (readFromCSV . toFileName) s
     return $ concat nestedScoreboards
     where
-        toFileName s = "data/" ++ s ++ ".csv"
+        toFileName f = "data/" ++ f ++ ".csv"
 
 databaseLookup :: Database -> String -> Maybe String -> [Entry]
 databaseLookup db objectiveLookup maybeServerLookup =

@@ -3,7 +3,6 @@
 import Web.Scotty
 import Network.Wai.Middleware.Static ( addBase, staticPolicy )
 import Data.Scoreboards
-import Control.Monad
 import Data.Aeson.Types
 
 instance ToJSON Entry where

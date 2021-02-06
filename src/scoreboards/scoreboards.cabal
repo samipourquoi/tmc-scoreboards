@@ -20,5 +20,6 @@ library
     csv,
     containers,
     filepath,
-    sort
+    sort,
+    aeson
   default-language: Haskell2010

@@ -9,7 +9,7 @@ dist: node_modules
 	npx parcel build src/client/index.html
 
 server:
-	stack build --fast --pedantic
+	stack build --fast
 
 node_modules:
 	npm ci
