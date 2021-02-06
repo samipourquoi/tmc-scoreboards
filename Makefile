@@ -11,6 +11,7 @@ dist: node_modules
 server:
 	stack build --fast
 
+install: node_modules
 node_modules:
 	npm ci
 
