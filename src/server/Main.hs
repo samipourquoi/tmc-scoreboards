@@ -5,6 +5,7 @@ import Network.Wai.Middleware.Static ( addBase, staticPolicy )
 import Data.Scoreboards
 import Data.Aeson.Types
 import Control.Monad.IO.Class (liftIO)
+import System.Environment
 
 instance ToJSON Entry where
     toJSON (Entry _ user score _) = 
@@ -13,12 +14,20 @@ instance ToJSON Entry where
             "score" .= score
         ]
 
+getPort :: IO Int
+getPort = do
+  port <- lookupEnv "PORT"
+  return $ case port of
+    Just p  -> read p
+    Nothing -> 3000
+
 main :: IO ()
 main = do
   db <- generateDatabase ["endtech","litetech"]
   let onObjectiveRequest = databaseLookup db
+  port <- getPort
 
-  scotty 80 $ do
+  scotty port $ do
     -- api
     get "/api/random" $ do
       objective <- liftIO . randomObjective $ db
