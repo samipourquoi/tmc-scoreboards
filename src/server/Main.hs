@@ -23,7 +23,7 @@ getPort = do
 
 main :: IO ()
 main = do
-  db <- generateDatabase ["endtech","litetech","wavetech"]
+  db <- generateDatabase ["endtech","litetech","wavetech","lunaar"]
   let onObjectiveRequest = databaseLookup db
   port <- getPort
 

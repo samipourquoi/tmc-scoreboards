@@ -17,7 +17,8 @@ export function ServerBar({
 		"Global",
 		"EndTech",
 		"LiteTech",
-		"WaveTech"
+		"WaveTech",
+		"Lunaar"
 	];
 
 	return (
