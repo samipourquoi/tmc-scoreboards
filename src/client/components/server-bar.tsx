@@ -16,7 +16,8 @@ export function ServerBar({
 	const servers = [
 		"Global",
 		"EndTech",
-		"LiteTech"
+		"LiteTech",
+		"WaveTech"
 	];
 
 	return (
